@@ -1,0 +1,10 @@
+# 官方品牌包占着侧栏的两个单占位品牌位，而单占位插槽同时只能有一个占用者，所以先把它停用。
+# name 在这里是匹配断言：上游如果更换了这一行的包名，这条补丁会被跳过并告警，而不是误停别的行。
+- id: ui-brand-official
+  name: '@deepseek-ai/dsh-client-ui-brand-official'
+  disabled: true
+
+# 插入蓝宝品牌插件。行名必须就是包名本身：浏览器半边挂在以包名为行名的 Loader 行上。
+- insert:
+    - id: lanbao-brand
+      name: dsh-lanbao-brand
