@@ -1,0 +1,4 @@
+# 插入蓝宝界面皮肤。行名必须就是包名本身：浏览器半边挂在以包名为行名的 Loader 行上。
+- insert:
+    - id: lanbao-skin
+      name: dsh-lanbao-skin

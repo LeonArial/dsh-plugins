@@ -1,0 +1,42 @@
+{
+  "name": "dsh-lanbao-skin",
+  "version": "0.1.0",
+  "description": "蓝宝界面皮肤：Apple 风格的配色、材质与细节",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.3 <0.2.3"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "prepack": "pnpm run typecheck && pnpm run build"
+  },
+  "packageManager": "pnpm@11.28.5",
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.1.0",
+    "esbuild": "0.25.12",
+    "typescript": "^6.0.3"
+  }
+}

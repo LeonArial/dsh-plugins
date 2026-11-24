@@ -5,18 +5,19 @@
 | 插件 | 说明 |
 |---|---|
 | [dsh-lanbao-brand](dsh-lanbao-brand/) | 蓝宝品牌与界面定制 |
+| [dsh-lanbao-skin](dsh-lanbao-skin/) | 界面外观：Apple 风格的配色、材质与细节 |
 
 ## 安装
 
 插件是 dsh bundle，需要先构建，再装进 profile。以桌面客户端的 `desktop` profile 为例，先完全退出客户端：
 
 ```sh
-cd dsh-lanbao-brand
+cd <插件目录>
 pnpm install
 pnpm build
 
 CLI="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
-"$CLI" plugin --profile desktop add /Users/leon/Documents/code/agents/plugins/dsh-lanbao-brand
+"$CLI" plugin --profile desktop add /Users/leon/Documents/code/agents/plugins/<插件目录>
 ```
 
 以本地路径安装时是 `link` 方式，之后改代码只需重新 `pnpm build`，客户端会实时加载，不需要重装。
@@ -61,10 +62,31 @@ CLI="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
 - 用到的插槽名在 0.2.3 上未发生变化，但没有验证
 - 升级 dsh 时重点核对：插槽契约、欢迎页 DOM 结构、引导步骤排序
 
+## dsh-lanbao-skin
+
+### 功能
+
+- 色板：中性灰阶画布 + 系统蓝强调色，深浅两套；状态色换成系统语义色
+- 材质：菜单、输入卡片、顶栏用毛玻璃；侧栏发丝分隔线；停靠面板统一圆角与投影
+- 细节：细化滚动条、选区色、键盘焦点环；系统要求降低透明度时退回不透明表面
+- 实现方式是覆盖上游语义 token 加少量 `data-*` 锚点，不改组件结构、不改行为
+
+### 修改点
+
+| 文件 | 内容 |
+|---|---|
+| `src/client/skin.ts` | 全部样式：token、材质、细节与降级规则 |
+
+### 已知限制
+
+- 只覆盖使用语义 token 的界面；上游写死颜色的少数角落保持原样
+- 依赖的锚点：`[data-slot="sidebar"]`、`[data-composer-card]`、`header[data-window-drag]`、`[data-dockkit-surface]`、`[role="menu"][data-menu-material]`；上游改名后对应效果会静默失效
+- 应用加载前的引导页仍是上游默认配色，插件注入后才生效
+
 ## 开发
 
 ```sh
-cd dsh-lanbao-brand
+cd <插件目录>
 pnpm install
 pnpm typecheck   # 用 0.2.2-rc.3 的类型包校验插槽名和属性
 pnpm build       # 产出 lib/index.js、lib/client.js、lib/assets/
