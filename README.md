@@ -5,7 +5,6 @@
 | 插件 | 说明 |
 |---|---|
 | [dsh-lanbao-brand](dsh-lanbao-brand/) | 蓝宝品牌与界面定制 |
-| [dsh-lanbao-skin](dsh-lanbao-skin/) | 界面外观：Apple 风格的配色、材质与细节 |
 
 ## 安装
 
@@ -61,30 +60,6 @@ CLI="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
 - `engines.dsh` 限定 `>=0.2.2-rc.3 <0.2.3`，类型依赖固定在 `0.2.2-rc.3`
 - 用到的插槽名在 0.2.3 上未发生变化，但没有验证
 - 升级 dsh 时重点核对：插槽契约、欢迎页 DOM 结构、引导步骤排序
-
-## dsh-lanbao-skin
-
-### 功能
-
-- 色板：中性灰阶画布 + 系统蓝强调色，深浅两套；状态色换成系统语义色
-- 材质：菜单、输入卡片、顶栏用毛玻璃；停靠面板统一圆角与投影
-- 布局：侧栏做成浮在画布上的圆角面板，折叠后成为悬浮图标栏；折叠时右侧面板不再在中栏留下描边
-- 动效：菜单从锚点方向展开、弹窗轻微下沉入场、按钮按下即缩放、侧栏折叠用减速曲线、切换深浅色渐变过渡
-- 细节：细化滚动条、选区色、键盘焦点环；系统要求降低透明度或减少动态效果时自动降级
-- 实现方式是覆盖上游语义 token 加少量 `data-*` 锚点，不改组件结构、不改行为
-
-### 修改点
-
-| 文件 | 内容 |
-|---|---|
-| `src/client/skin.ts` | 全部样式：token、布局、材质、动效与降级规则 |
-
-### 已知限制
-
-- 只覆盖使用语义 token 的界面；上游写死颜色的少数角落保持原样
-- 图标沿用上游图形，只做了颜色过渡；替换图标需要改上游资源，不在 CSS 范围内
-- 依赖的锚点：`[data-slot="sidebar"]`、`[data-composer-card]`、`header[data-window-drag]`、`[data-dockkit-surface]`、`[data-rightbar-collapsed]`、`[role="menu"][data-menu-material]`、`[role="dialog"]`；上游改名后对应效果会静默失效
-- 应用加载前的引导页仍是上游默认配色，插件注入后才生效
 
 ## 开发
 
