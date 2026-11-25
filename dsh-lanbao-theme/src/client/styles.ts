@@ -55,13 +55,6 @@ header[data-window-drag]::after {
   -webkit-backdrop-filter: none;
 }
 
-html body[data-ds-dark-theme] [data-composer-card] {
-  background:
-    linear-gradient(180deg,
-      color-mix(in srgb, var(--dsw-alias-bg-layer-2) 90%, #0A84FF) 0%,
-      var(--dsw-alias-bg-layer-2) 55%);
-}
-
 [data-composer-card]::after {
   content: '';
   position: absolute;
@@ -233,24 +226,6 @@ html[data-platform="darwin"] body [data-slot="sidebar"] > div {
   }
 }
 
-/* 深色主题的蓝紫极光：光晕缓慢漂移，借鉴 Codex 产品页的渐变背景。 */
-@media (prefers-reduced-motion: no-preference) {
-  html body[data-ds-dark-theme] {
-    animation: lanbao-aurora 36s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes lanbao-aurora {
-  0% {
-    background-position: 50% 0%, 100% 100%, 0% 100%;
-  }
-  50% {
-    background-position: 30% 12%, 70% 80%, 20% 70%;
-  }
-  100% {
-    background-position: 60% 6%, 90% 90%, 10% 85%;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   [role="dialog"][aria-modal="true"] {
@@ -289,23 +264,7 @@ html body:not([data-ds-dark-theme]) [data-composer-card] {
     linear-gradient(180deg, #FBFDFF 0%, var(--dsw-alias-bg-layer-2) 48%);
 }
 
-/* 深色主题：深蓝黑画布上叠加低强度彩色光晕，形成「五彩斑斓的黑」。 */
-html body[data-ds-dark-theme] {
-  background-image:
-    radial-gradient(110% 70% at 50% -10%, rgba(101, 134, 254, 0.24), transparent 62%),
-    radial-gradient(70% 50% at 100% 100%, rgba(157, 184, 254, 0.16), transparent 60%),
-    radial-gradient(60% 40% at 0% 100%, rgba(141, 166, 252, 0.12), transparent 60%);
-  background-size: 160% 160%, 150% 150%, 140% 140%;
-  background-repeat: no-repeat;
-  background-position: 50% 0%, 100% 100%, 0% 100%;
-}
-
-/* 深色主题：极淡的蓝白纤维，保持哑光纸感。 */
-html body[data-ds-dark-theme] [data-slot="sidebar"] > div,
-html body[data-ds-dark-theme] [role="menu"][data-menu-material] {
-  background-image:
-    repeating-linear-gradient(0deg, rgba(160, 200, 255, 0.014) 0 1px, transparent 1px 3px);
-}
+/* 深色主题保持最初的中性表面，不叠加额外光晕与纹理。 */
 `
 
 /**
