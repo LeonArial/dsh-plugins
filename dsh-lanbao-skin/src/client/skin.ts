@@ -14,7 +14,7 @@ const CSS = String.raw`
    变量必须声明在 body 上：主题运行时把浅色变量直接声明在 body，
    元素自身的声明优先于从 html 继承的值，挂在 html 上会被它盖住。 */
 html body {
-  --dsw-alias-bg-base: #f5f5f7 !important;
+  --dsw-alias-bg-base: #ffffff !important;
   --dsw-alias-bg-layer-1: #ffffff !important;
   --dsw-alias-bg-layer-2: #ffffff !important;
   --dsw-alias-bg-layer-3: #ffffff !important;
@@ -57,8 +57,8 @@ html body {
   --dsw-specific-sidebar-wash-bottom-clear: transparent !important;
   --dsw-specific-sidebar-nav-item-active: rgba(0, 0, 0, 0.05) !important;
   --dsw-specific-sidebar-nav-item-active-accent: rgba(0, 113, 227, 0.10) !important;
-  --dsw-specific-sidebar-glass-fill: rgba(255, 255, 255, 0.60) !important;
-  --dsw-specific-sidebar-glass-hover: rgba(255, 255, 255, 0.85) !important;
+  --dsw-specific-sidebar-glass-fill: rgba(255, 255, 255, 0.90) !important;
+  --dsw-specific-sidebar-glass-hover: rgba(255, 255, 255, 0.96) !important;
   --dsw-specific-menu: rgba(247, 247, 249, 0.84) !important;
   --dsw-specific-input-major: #ffffff !important;
   --dsw-specific-bubble: #eef3fa !important;
@@ -192,7 +192,14 @@ div:has(> [data-slot="sidebar"]) {
   box-shadow: inset 0 0 0 0.5px var(--dsw-alias-border-l1);
 }
 
-[data-ds-dark-theme] [data-slot="sidebar"] > div {
+/* 桌面端侧栏带原生 vibrancy，透明表面会把壁纸的灰色带进来。
+   这里给侧栏表面一个足够不透明的底色，保留一点通透感但不显灰。 */
+html body [data-slot="sidebar"] > div {
+  background-color: rgba(255, 255, 255, 0.92);
+}
+
+html body[data-ds-dark-theme] [data-slot="sidebar"] > div {
+  background-color: rgba(35, 35, 38, 0.92);
   box-shadow: none;
 }
 
