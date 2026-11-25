@@ -145,6 +145,11 @@ html body {
 [role="menu"][data-menu-material][data-menu-material] {
   backdrop-filter: blur(26px) saturate(180%);
   -webkit-backdrop-filter: blur(26px) saturate(180%);
+  transition:
+    background-color 240ms ease,
+    box-shadow 240ms ease,
+    opacity 160ms ease,
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* 输入卡片：半透明表面 + 分层投影，读作一张浮在对话之上的纸 */
@@ -174,12 +179,30 @@ header[data-window-drag][data-window-drag] {
   -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
-/* 侧栏：用一条内阴影发丝线代替边框，避免布局抖动 */
-[data-slot="sidebar"] > div {
-  box-shadow: inset -0.5px 0 0 var(--dsw-alias-border-l1);
+/* 侧栏：做成浮在画布上的圆角面板，与外框留出呼吸间距 */
+div:has(> [data-slot="sidebar"]) {
+  border-right-color: transparent !important;
 }
 
-/* 停靠面板：统一圆角与浅投影 */
+[data-slot="sidebar"] > div {
+  margin: 6px 0 6px 6px;
+  height: calc(100% - 12px);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 0.5px var(--dsw-alias-border-l1);
+}
+
+[data-ds-dark-theme] [data-slot="sidebar"] > div {
+  box-shadow: none;
+}
+
+/* 折叠的右侧面板仍然挂载并覆盖在中栏上，它自身的内嵌描边会在中栏里画出一条竖线。
+   折叠时去掉材质效果，展开时再恢复圆角与投影。 */
+[data-rightbar-collapsed="true"] [data-dockkit-surface] {
+  border-radius: 0;
+  box-shadow: none !important;
+}
+
 [data-dockkit-surface][data-dockkit-surface] {
   border-radius: 16px;
   box-shadow:
@@ -222,13 +245,80 @@ header[data-window-drag][data-window-drag] {
   background: transparent;
 }
 
-/* ============ 5. 动效与降级 ============ */
+/* ============ 5. 动效与交互反馈 ============ */
+
+/* 图标颜色跟随状态平滑过渡 */
+[data-icon] {
+  transition: color 160ms ease, opacity 160ms ease;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   [data-composer-card][data-composer-card],
-  [role="menu"][data-menu-material][data-menu-material],
   header[data-window-drag][data-window-drag] {
     transition: background-color 240ms ease, box-shadow 240ms ease;
+  }
+
+  /* 侧栏保留上游的宽度过渡，折叠和展开用结尾更慢的减速曲线；
+     同时让切换深浅色时底色渐变 */
+  [data-slot="sidebar"] > div {
+    transition:
+      width var(--ds-transition-duration-slow) cubic-bezier(0.32, 0.72, 0, 1),
+      background-color 320ms ease,
+      color 320ms ease;
+  }
+
+  /* 画布底色随主题渐变，避免整屏闪切 */
+  html body {
+    transition: background-color 320ms ease, color 320ms ease;
+  }
+
+  /* 按压反馈发生在按下的一瞬间，而不是抬起之后 */
+  button:not(:disabled) {
+    transition: transform 120ms ease, background-color 160ms ease, opacity 160ms ease;
+  }
+
+  button:not(:disabled):active {
+    transform: scale(0.97);
+  }
+
+  /* 菜单从锚点方向展开：方向由上游写在 data-anchor-side 上 */
+  [role="menu"] {
+    transition: opacity 160ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [role="menu"][data-anchor-side="top"] {
+    transform-origin: center bottom;
+  }
+
+  [role="menu"][data-anchor-side="bottom"] {
+    transform-origin: center top;
+  }
+
+  [role="menu"][data-anchor-side="left"] {
+    transform-origin: right center;
+  }
+
+  [role="menu"][data-anchor-side="right"] {
+    transform-origin: left center;
+  }
+
+  @starting-style {
+    [role="menu"] {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+
+  /* 弹窗以轻微下沉和放大入场，与菜单共用同一条曲线 */
+  [role="dialog"][aria-modal="true"] {
+    animation: lanbao-dialog-in 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@keyframes lanbao-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
   }
 }
 
