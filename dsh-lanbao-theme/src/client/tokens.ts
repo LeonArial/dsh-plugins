@@ -19,26 +19,26 @@ export type TokenOverrides = Record<string, TokenPair>
 
 export const TOKENS: TokenOverrides = {
   // ── 画布与表面 ────────────────────────────────────────────────
-  '--dsw-alias-bg-base': { light: '#EEF4FB', dark: '#171C26' },
-  '--dsw-alias-bg-layer-1': { light: '#F7FAFE', dark: '#1C2230' },
-  '--dsw-alias-bg-layer-2': { light: '#E6EEF8', dark: '#242C3B' },
-  '--dsw-alias-bg-layer-3': { light: '#DCE7F3', dark: '#2C3547' },
-  '--dsw-alias-bg-overlay': { light: 'rgba(20, 32, 46, 0.32)', dark: 'rgba(5, 10, 18, 0.60)' },
+  '--dsw-alias-bg-base': { light: '#EEF4FB', dark: '#191D2E' },
+  '--dsw-alias-bg-layer-1': { light: '#F7FAFE', dark: '#1E2338' },
+  '--dsw-alias-bg-layer-2': { light: '#E6EEF8', dark: '#262C43' },
+  '--dsw-alias-bg-layer-3': { light: '#DCE7F3', dark: '#2E3550' },
+  '--dsw-alias-bg-overlay': { light: 'rgba(20, 32, 46, 0.32)', dark: 'rgba(10, 12, 24, 0.64)' },
 
   // ── 文字 ──────────────────────────────────────────────────────
-  '--dsw-alias-label-primary': { light: '#14202E', dark: '#F0F4FA' },
-  '--dsw-alias-label-secondary': { light: '#51606F', dark: '#A9B4C4' },
-  '--dsw-alias-label-tertiary': { light: '#7E8B99', dark: '#8391A3' },
-  '--dsw-alias-label-caption': { light: '#7E8B99', dark: '#8391A3' },
-  '--dsw-alias-label-dimmed': { light: '#A8B4C0', dark: '#5E6B7D' },
+  '--dsw-alias-label-primary': { light: '#14202E', dark: '#F2F4FF' },
+  '--dsw-alias-label-secondary': { light: '#51606F', dark: '#B4BCD6' },
+  '--dsw-alias-label-tertiary': { light: '#7E8B99', dark: '#8D97B5' },
+  '--dsw-alias-label-caption': { light: '#7E8B99', dark: '#8D97B5' },
+  '--dsw-alias-label-dimmed': { light: '#A8B4C0', dark: '#68718C' },
   '--dsw-alias-label-on-color': { light: '#FFFFFF', dark: '#FFFFFF' },
   '--dsw-alias-label-primary-foreground': { light: '#FFFFFF', dark: '#0D0D0D' },
 
   // ── 边框 ──────────────────────────────────────────────────────
-  '--dsw-alias-border-l1': { light: '#DDE7F1', dark: '#2E3746' },
-  '--dsw-alias-border-l2': { light: '#CFDCE9', dark: '#394456' },
-  '--dsw-alias-border-l3': { light: '#C0D0E0', dark: '#445167' },
-  '--dsw-alias-border-l4': { light: '#B2C4D6', dark: '#505E75' },
+  '--dsw-alias-border-l1': { light: '#DDE7F1', dark: '#303752' },
+  '--dsw-alias-border-l2': { light: '#CFDCE9', dark: '#3B4363' },
+  '--dsw-alias-border-l3': { light: '#C0D0E0', dark: '#465074' },
+  '--dsw-alias-border-l4': { light: '#B2C4D6', dark: '#525C84' },
   '--dsw-alias-border-selected': { light: '#0071E3', dark: '#0A84FF' },
 
   // ── 品牌 ──────────────────────────────────────────────────────
@@ -53,18 +53,18 @@ export const TOKENS: TokenOverrides = {
   '--dsw-alias-button-primary-dimmed': { light: 'rgba(0, 113, 227, 0.35)', dark: 'rgba(10, 132, 255, 0.40)' },
   '--dsw-alias-button-info-fill': { light: '#0071E3', dark: '#0A84FF' },
   '--dsw-alias-button-info-hover': { light: '#0077ED', dark: '#3395FF' },
-  '--dsw-alias-button-floating-fill': { light: '#FBFDFF', dark: '#28313F' },
+  '--dsw-alias-button-floating-fill': { light: '#FBFDFF', dark: '#2B3250' },
   '--dsw-alias-button-floating-hover': { light: '#EAF2FA', dark: '#303A4A' },
 
   // ── 卡片与浮层 ────────────────────────────────────────────────
   '--dsw-alias-card-fill': { light: '#FBFDFF', dark: '#202733' },
-  '--dsw-alias-card-fill-hover': { light: '#EAF2FA', dark: '#28313F' },
+  '--dsw-alias-card-fill-hover': { light: '#EAF2FA', dark: '#2B3250' },
   '--dsw-alias-settings-card-fill': { light: '#FBFDFF', dark: '#202733' },
   '--dsw-alias-settings-card-stroke': { light: '#DDE7F1', dark: '#333D4E' },
   '--dsw-alias-menu-group-header-fill': { light: '#EAF2FA', dark: '#222A37' },
-  '--dsw-alias-toast-bg': { light: '#14202E', dark: '#F0F4FA' },
+  '--dsw-alias-toast-bg': { light: '#14202E', dark: '#F2F4FF' },
   '--dsw-alias-toast-label': { light: '#FBFDFF', dark: '#11161F' },
-  '--dsw-alias-tooltip-bg': { light: '#14202E', dark: '#F0F4FA' },
+  '--dsw-alias-tooltip-bg': { light: '#14202E', dark: '#F2F4FF' },
   '--dsw-alias-tooltip-label': { light: '#FBFDFF', dark: '#11161F' },
 
   // ── 状态 ──────────────────────────────────────────────────────
@@ -114,7 +114,7 @@ export const TOKENS: TokenOverrides = {
   '--dsw-specific-tip': { light: '#EDF3FA', dark: '#242B38' },
   '--dsw-specific-guide-hero': { light: '#E3ECF6', dark: '#202733' },
   '--dsw-specific-login-input': { light: '#EDF3FA', dark: '#202733' },
-  '--dsw-specific-file-upload-track': { light: '#DDE7F1', dark: '#2E3746' },
+  '--dsw-specific-file-upload-track': { light: '#DDE7F1', dark: '#303752' },
 
   // ── 圆角 ──────────────────────────────────────────────────────
   '--dsw-radius-sm': { light: '8px', dark: '8px' },
