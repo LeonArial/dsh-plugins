@@ -57,8 +57,8 @@ html body {
   --dsw-specific-sidebar-wash-bottom-clear: transparent !important;
   --dsw-specific-sidebar-nav-item-active: rgba(0, 0, 0, 0.05) !important;
   --dsw-specific-sidebar-nav-item-active-accent: rgba(0, 113, 227, 0.10) !important;
-  --dsw-specific-sidebar-glass-fill: rgba(255, 255, 255, 0.90) !important;
-  --dsw-specific-sidebar-glass-hover: rgba(255, 255, 255, 0.60) !important;
+  --dsw-specific-sidebar-glass-fill: rgba(0, 0, 0, 0.05) !important;
+  --dsw-specific-sidebar-glass-hover: rgba(0, 0, 0, 0.08) !important;
   --dsw-specific-menu: rgba(247, 247, 249, 0.84) !important;
   --dsw-specific-input-major: #ffffff !important;
   --dsw-specific-bubble: #eef3fa !important;
