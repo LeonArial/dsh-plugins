@@ -58,7 +58,7 @@ html body {
   --dsw-specific-sidebar-nav-item-active: rgba(0, 0, 0, 0.05) !important;
   --dsw-specific-sidebar-nav-item-active-accent: rgba(0, 113, 227, 0.10) !important;
   --dsw-specific-sidebar-glass-fill: rgba(255, 255, 255, 0.90) !important;
-  --dsw-specific-sidebar-glass-hover: rgba(255, 255, 255, 0.96) !important;
+  --dsw-specific-sidebar-glass-hover: rgba(255, 255, 255, 0.60) !important;
   --dsw-specific-menu: rgba(247, 247, 249, 0.84) !important;
   --dsw-specific-input-major: #ffffff !important;
   --dsw-specific-bubble: #eef3fa !important;
@@ -192,15 +192,24 @@ div:has(> [data-slot="sidebar"]) {
   box-shadow: inset 0 0 0 0.5px var(--dsw-alias-border-l1);
 }
 
-/* 桌面端侧栏带原生 vibrancy，透明表面会把壁纸的灰色带进来。
-   这里给侧栏表面一个足够不透明的底色，保留一点通透感但不显灰。 */
+/* 侧栏表面的底色。macOS 桌面端上游把侧栏设成透明（背景交给系统 vibrancy），
+   所以普通规则会被 [data-platform=darwin] 的透明背景压掉；darwin 下用更高的特异性覆盖，
+   把系统材质的灰压下去，只保留极轻微的通透感。 */
 html body [data-slot="sidebar"] > div {
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: #ffffff;
 }
 
 html body[data-ds-dark-theme] [data-slot="sidebar"] > div {
-  background-color: rgba(35, 35, 38, 0.92);
+  background-color: #232326;
   box-shadow: none;
+}
+
+[data-platform="darwin"] [data-slot="sidebar"] > div {
+  background-color: rgba(255, 255, 255, 0.97);
+}
+
+[data-platform="darwin"] body[data-ds-dark-theme] [data-slot="sidebar"] > div {
+  background-color: rgba(35, 35, 38, 0.95);
 }
 
 /* 折叠的右侧面板仍然挂载并覆盖在中栏上，它自身的内嵌描边会在中栏里画出一条竖线。
