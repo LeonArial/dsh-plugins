@@ -55,6 +55,13 @@ header[data-window-drag]::after {
   -webkit-backdrop-filter: none;
 }
 
+html body[data-ds-dark-theme] [data-composer-card] {
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--dsw-alias-bg-layer-2) 90%, #0A84FF) 0%,
+      var(--dsw-alias-bg-layer-2) 55%);
+}
+
 [data-composer-card]::after {
   content: '';
   position: absolute;
@@ -263,11 +270,19 @@ html body:not([data-ds-dark-theme]) [data-composer-card] {
     linear-gradient(180deg, #FBFDFF 0%, var(--dsw-alias-bg-layer-2) 48%);
 }
 
-/* 深色主题：极淡的白色纤维，保持哑光纸感。 */
+/* 深色主题：深蓝黑画布上叠加低强度彩色光晕，形成「五彩斑斓的黑」。 */
+html body[data-ds-dark-theme] {
+  background-image:
+    radial-gradient(110% 70% at 50% -10%, rgba(10, 132, 255, 0.16), transparent 62%),
+    radial-gradient(70% 50% at 100% 100%, rgba(36, 192, 235, 0.10), transparent 60%),
+    radial-gradient(60% 40% at 0% 100%, rgba(120, 90, 255, 0.08), transparent 60%);
+}
+
+/* 深色主题：极淡的蓝白纤维，保持哑光纸感。 */
 html body[data-ds-dark-theme] [data-slot="sidebar"] > div,
 html body[data-ds-dark-theme] [role="menu"][data-menu-material] {
   background-image:
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 3px);
+    repeating-linear-gradient(0deg, rgba(160, 200, 255, 0.014) 0 1px, transparent 1px 3px);
 }
 `
 
