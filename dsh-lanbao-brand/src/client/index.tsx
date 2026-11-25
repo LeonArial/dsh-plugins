@@ -11,6 +11,7 @@ import { LanbaoBrandMark, LanbaoHeroMark } from './BrandMark.tsx'
 import { LanbaoBrandName } from './BrandName.tsx'
 import { installBrandCopy } from './brandCopy.ts'
 import { installDocumentTitle } from './documentTitle.ts'
+import { installEyeStyles } from './eyeStyles.ts'
 import { installFeedbackRedirect } from './feedbackUrl.ts'
 import { installHeroCopy } from './heroCopy.ts'
 
@@ -36,6 +37,7 @@ export function apply(ctx: ClientContext): void {
     ctx.slots.register({ name: 'settings.onboarding', id: 'lanbao-skip-onboarding', order: -1000 }, () => null))
   ctx.effect(() => installBrandCopy())
   ctx.effect(() => installDocumentTitle())
+  ctx.effect(() => installEyeStyles())
   ctx.effect(() => installFeedbackRedirect())
   ctx.effect(() => installHeroCopy())
 }

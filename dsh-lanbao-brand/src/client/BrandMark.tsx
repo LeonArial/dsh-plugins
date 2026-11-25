@@ -58,8 +58,8 @@ function Eyes() {
       viewBox="0 0 100 100"
       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
     >
-      <rect x="49.2" y="32.8" width="5.9" height="16" rx="2.95" fill="#000000" />
-      <rect x="63.7" y="32.8" width="5.9" height="16" rx="2.95" fill="#000000" />
+      <rect data-lanbao-eye="" x="49.2" y="32.8" width="5.9" height="16" rx="2.95" />
+      <rect data-lanbao-eye="" x="63.7" y="32.8" width="5.9" height="16" rx="2.95" />
     </svg>
   )
 }
