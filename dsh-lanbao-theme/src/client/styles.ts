@@ -19,7 +19,7 @@ header[data-window-drag] {
   border-bottom: 1px solid var(--dsw-alias-border-l1);
 }
 
-header[data-window-drag]::after {
+html body:not([data-ds-dark-theme]) header[data-window-drag]::after {
   content: '';
   position: absolute;
   left: 0;
