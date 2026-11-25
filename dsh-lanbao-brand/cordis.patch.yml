@@ -8,3 +8,14 @@
 - insert:
     - id: lanbao-brand
       name: dsh-lanbao-brand
+
+# 隐藏 设置 → 模型 页里的「DeepSeek 账号」行（账号模型目录路由）。
+# deepseek-account 账号服务本体不停用，登录能力本身不受影响。
+- id: llm-deepseek-account
+  name: '@deepseek-ai/dsh-llm-deepseek-account'
+  disabled: true
+
+# 隐藏 设置 → 模型 页里的「DeepSeek」模型提供方行。
+- id: llm-deepseek
+  name: '@deepseek-ai/dsh-llm-deepseek-api-key'
+  disabled: true

@@ -9,6 +9,7 @@ import type {} from '@deepseek-ai/dsh-client-ui-conversation/client'
 import type {} from '@deepseek-ai/dsh-client-ui-settings/client'
 import { LanbaoBrandMark, LanbaoHeroMark } from './BrandMark.tsx'
 import { LanbaoBrandName } from './BrandName.tsx'
+import { installBrandCopy } from './brandCopy.ts'
 import { installDocumentTitle } from './documentTitle.ts'
 import { installFeedbackRedirect } from './feedbackUrl.ts'
 import { installHeroCopy } from './heroCopy.ts'
@@ -33,6 +34,7 @@ export function apply(ctx: ClientContext): void {
   // 用户从账号菜单主动登录、或显式请求某个引导步骤时，走的是各自独立的入口，不受影响。
   ctx.slots.inject('settings.onboarding', () =>
     ctx.slots.register({ name: 'settings.onboarding', id: 'lanbao-skip-onboarding', order: -1000 }, () => null))
+  ctx.effect(() => installBrandCopy())
   ctx.effect(() => installDocumentTitle())
   ctx.effect(() => installFeedbackRedirect())
   ctx.effect(() => installHeroCopy())

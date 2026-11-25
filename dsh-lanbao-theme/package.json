@@ -1,0 +1,43 @@
+{
+  "name": "dsh-lanbao-theme",
+  "version": "0.1.0",
+  "description": "蓝宝界面主题：借鉴 Codex 网页版的中性视觉，保留蓝宝品牌色",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.3 <0.2.3"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "prepack": "pnpm run typecheck && pnpm run build"
+  },
+  "packageManager": "pnpm@11.28.5",
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.1.0",
+    "@deepseek-ai/dsh-client-ui-theme": "0.2.2-rc.3",
+    "esbuild": "0.25.12",
+    "typescript": "^6.0.3"
+  }
+}

@@ -11,15 +11,15 @@ declare const require: { asset(path: string): string }
 const markImage = `url("${require.asset(__BRAND_MARK_ASSET__)}")`
 
 /**
- * 标志用蒙版绘制：图片只提供轮廓，颜色取 currentColor。
- * 这样同一个文件在深色主题下是浅色标志、浅色主题下是深色标志，跟随宿主位置的文字色。
+ * 标志用蒙版绘制：图片只提供轮廓，颜色取蓝宝深蓝。
+ * 直接在插件里固定为较深的品牌蓝，不依赖主题插件是否启用，也不随文字色变化。
  */
-function markStyle(size: number): CSSProperties {
+function markStyle(size: number, color: string): CSSProperties {
   return {
     width: size,
     height: size,
     flex: 'none',
-    backgroundColor: 'currentColor',
+    backgroundColor: color,
     WebkitMaskImage: markImage,
     maskImage: markImage,
     WebkitMaskRepeat: 'no-repeat',
@@ -36,8 +36,47 @@ function markStyle(size: number): CSSProperties {
  * @param props - 宿主给出的正方形边长。
  * @returns 显示标志的元素。
  */
+/** 头部浅蓝与身体深蓝。 */
+const HEAD_COLOR = '#24C0EB'
+const BODY_COLOR = '#0056B3'
+
+/** 身体在 logo 高度中的起始比例，用于把头与身子分开着色。 */
+const BODY_TOP = 60
+
+/** 头部层保留上部，身体层保留下部，两层互补裁剪、共用同一轮廓。 */
+const HEAD_CLIP = `inset(0 0 ${100 - BODY_TOP}% 0)`
+const BODY_CLIP = `inset(${BODY_TOP}% 0 0 0)`
+
+/**
+ * 黑色眼睛：原图里眼睛是面罩内的两个竖长圆角条，
+ * 单独覆盖一层纯黑，避免随头部一起被染成蓝色。
+ */
+function Eyes() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 100 100"
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+    >
+      <rect x="49.2" y="32.8" width="5.9" height="16" rx="2.95" fill="#000000" />
+      <rect x="63.7" y="32.8" width="5.9" height="16" rx="2.95" fill="#000000" />
+    </svg>
+  )
+}
+
+/**
+ * 侧栏品牌标志，展开的品牌行和折叠后的窄栏共用。
+ * @param props - 宿主给出的正方形边长。
+ * @returns 显示标志的元素。
+ */
 export function LanbaoBrandMark({ size }: SidebarBrandMarkOwnerProps) {
-  return <span aria-hidden="true" style={{ ...markStyle(size), display: 'inline-block' }} />
+  return (
+    <span aria-hidden="true" style={{ position: 'relative', display: 'inline-block', width: size, height: size }}>
+      <span style={{ ...markStyle(size, HEAD_COLOR), position: 'absolute', inset: 0, clipPath: HEAD_CLIP, WebkitClipPath: HEAD_CLIP }} />
+      <span style={{ ...markStyle(size, BODY_COLOR), position: 'absolute', inset: 0, clipPath: BODY_CLIP, WebkitClipPath: BODY_CLIP }} />
+      <Eyes />
+    </span>
+  )
 }
 
 /**
@@ -46,5 +85,16 @@ export function LanbaoBrandMark({ size }: SidebarBrandMarkOwnerProps) {
  * @returns 显示标志的元素。
  */
 export function LanbaoHeroMark({ size, className }: HeroBrandMarkOwnerProps) {
-  return <span aria-hidden="true" className={className} data-lanbao-hero-mark="" style={markStyle(size)} />
+  return (
+    <span
+      aria-hidden="true"
+      className={className}
+      data-lanbao-hero-mark=""
+      style={{ position: 'relative', display: 'inline-block', width: size, height: size }}
+    >
+      <span style={{ ...markStyle(size, HEAD_COLOR), position: 'absolute', inset: 0, clipPath: HEAD_CLIP, WebkitClipPath: HEAD_CLIP }} />
+      <span style={{ ...markStyle(size, BODY_COLOR), position: 'absolute', inset: 0, clipPath: BODY_CLIP, WebkitClipPath: BODY_CLIP }} />
+      <Eyes />
+    </span>
+  )
 }
